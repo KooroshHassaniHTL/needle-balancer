@@ -7,7 +7,8 @@
 <?import javafx.geometry.Insets?>
 
 
-<AnchorPane xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1"
+
+<AnchorPane fx:id="scene"  xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="org.example.needlebalance.NBController">
 
     <!-- Center everything -->
@@ -16,7 +17,7 @@
                AnchorPane.leftAnchor="0.0"
                AnchorPane.rightAnchor="0.0">
 
-        <VBox alignment="CENTER" spacing="25">
+        <VBox alignment="CENTER" spacing="20">
 
             <Label text="Balance!"
                    style="-fx-font-size: 28px; -fx-font-weight: bold;"/>
@@ -58,16 +59,17 @@
 
             </Pane>
 
+            <!--
             <HBox alignment="CENTER" spacing="25" prefWidth="500">
                 <Button fx:id="leftButton" text="←"
-                        style="-fx-pref-width: 50; -fx-pref-height: 25"
-                        onAction="#onLeftButtonClicked"/>
+                        style="-fx-pref-width: 50; -fx-pref-height: 25"/>
                 <Button fx:id="rightButton" text="→"
-                        style="-fx-pref-width: 50; -fx-pref-height: 25"
-                        onAction="#onRightButtonClicked"/>
+                        style="-fx-pref-width: 50; -fx-pref-height: 25"/>
             </HBox>
+            -->
+            <Button fx:id="startButton" text="START" style="-fx-font-weight: bold;"/>
 
-            <Label text="Press A and D to stay inside the green zone."
+            <Label text="Press ← and → to stay inside the green zone."
                    style="-fx-font-size: 16px;"/>
             <Label
                     layoutX="150"
