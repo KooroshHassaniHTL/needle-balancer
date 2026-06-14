@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+
+<?import javafx.geometry.Insets?>
+
+
+<AnchorPane xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.example.needlebalance.NBController">
+
+    <!-- Center everything -->
+    <StackPane AnchorPane.topAnchor="0.0"
+               AnchorPane.bottomAnchor="0.0"
+               AnchorPane.leftAnchor="0.0"
+               AnchorPane.rightAnchor="0.0">
+
+        <VBox alignment="CENTER" spacing="25">
+
+            <Label text="Balance!"
+                   style="-fx-font-size: 28px; -fx-font-weight: bold;"/>
+
+            <!-- Balance Bar -->
+            <Pane fx:id="balancePane"
+                  prefWidth="500"
+                  prefHeight="50"
+                  maxWidth="500"
+                  minWidth="500">
+
+                <!-- Background -->
+                <Rectangle fx:id="backgroundBar"
+                           x="0"
+                           y="15"
+                           width="500"
+                           height="20"
+                           arcWidth="10"
+                           arcHeight="10"
+                           style="-fx-fill: lightgray;"/>
+
+                <!-- Safe zone -->
+                <Rectangle fx:id="safeZone"
+                           x="180"
+                           y="15"
+                           width="140"
+                           height="20"
+                           arcWidth="10"
+                           arcHeight="10"
+                           style="-fx-fill: limegreen;"/>
+
+                <!-- Balance marker -->
+                <Line fx:id="balanceMarker"
+                      startX="250"
+                      startY="0"
+                      endX="250"
+                      endY="50"
+                      style="-fx-stroke: red; -fx-stroke-width: 4;"/>
+
+            </Pane>
+
+            <HBox alignment="CENTER" spacing="25" prefWidth="500">
+                <Button fx:id="leftButton" text="←"
+                        style="-fx-pref-width: 50; -fx-pref-height: 25"
+                        onAction="#onLeftButtonClicked"/>
+                <Button fx:id="rightButton" text="→"
+                        style="-fx-pref-width: 50; -fx-pref-height: 25"
+                        onAction="#onRightButtonClicked"/>
+            </HBox>
+
+            <Label text="Press A and D to stay inside the green zone."
+                   style="-fx-font-size: 16px;"/>
+            <Label
+                    layoutX="150"
+                    layoutY="250"
+                    fx:id="scoreLabel"
+                    text="Score: 0"/>
+
+        </VBox>
+
+    </StackPane>
+
+</AnchorPane>
