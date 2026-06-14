@@ -41,9 +41,9 @@
 
                 <!-- Safe zone -->
                 <Rectangle fx:id="safeZone"
-                           x="180"
+                           x="210"
                            y="15"
-                           width="140"
+                           width="80"
                            height="20"
                            arcWidth="10"
                            arcHeight="10"

@@ -12,6 +12,8 @@ import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import org.example.needlebalance.Model.BalanceModel;
 
+import java.util.Random;
+
 public class NBController {
     /*
     @FXML private Button leftButton;
@@ -25,10 +27,11 @@ public class NBController {
     @FXML private AnchorPane scene;
     private boolean leftHold = false;
     private boolean rightHold = false;
-
+    private boolean randomizePosition = false;
     private double needleX = BAR_WIDTH/2; // start position in the middle of bar
     public static final double BAR_WIDTH = 500; // if you change this also change fxml accordingly
-    private static final double ANIMATION_TICK = 1;
+    private static final double NEEDLE_TICKSPEED = 0.2;
+    private static final int RANDOMIZER_MODIFIER = 4;
 
     private AnimationTimer animationTimer;
     private BalanceModel balanceModel;
@@ -37,7 +40,7 @@ public class NBController {
     @FXML
     private void initialize() {
         balanceModel = new BalanceModel();
-
+        /*
         startButton.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
             if (event.getCode() == KeyCode.ENTER){
                 balanceModel.randomizePosition();
@@ -45,12 +48,20 @@ public class NBController {
                 startButton.setVisible(false);
             }
         });
+        */
+
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
+            if (event.getCode() == KeyCode.ENTER){
+                startButton.setVisible(false);
+                randomizePosition = true;
+            }
+        });
 
         // make sure anchorpane can receive keyboard focus
         scene.setFocusTraversable(true);
 
         // request focus after scene is attached
-        scene.sceneProperty().addListener((obs, oldScene, newScene) -> {
+        scene.sceneProperty().addListener((observer, oldScene, newScene) -> {
             if (newScene != null) {
                 scene.requestFocus();
             }
@@ -78,10 +89,17 @@ public class NBController {
             @Override
             public void handle(long now){
                 if (leftHold) {
-                    moveNeedle(-ANIMATION_TICK);
+                    moveNeedle(-NEEDLE_TICKSPEED);
                 }
                 if (rightHold) {
-                    moveNeedle(ANIMATION_TICK);
+                    moveNeedle(NEEDLE_TICKSPEED);
+                }
+                if (randomizePosition) {
+                    int posRandom = (int) (Math.random() * RANDOMIZER_MODIFIER);
+                    int negRandom = (int) -(Math.random() * RANDOMIZER_MODIFIER);
+                    double randomizer = Math.random();
+                    if (randomizer < 0.5) moveNeedle(posRandom);
+                    else moveNeedle(negRandom);
                 }
             }
         };
