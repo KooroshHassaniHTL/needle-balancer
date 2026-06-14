@@ -4,27 +4,29 @@ import javafx.animation.AnimationTimer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
-import org.example.needlebalance.Model.BalanceModel;
 
 import java.util.Random;
 
 public class NBController {
     /*
-    @FXML private Button leftButton;
-    @FXML private Button rightButton;
-    @FXML private Rectangle safeZone;
-    @FXML private Rectangle backgroundBar;
-     */
+        @FXML private Button leftButton;
+        @FXML private Button rightButton;
+        @FXML private Rectangle backgroundBar;
+         */
     @FXML private Button startButton;
     @FXML private Line balanceMarker;
+    @FXML private Rectangle safeZone;
+    @FXML public Label scoreLabel;
     @FXML public Pane balancePane;
     @FXML private AnchorPane scene;
+    private int score = 0;
     private boolean leftHold = false;
     private boolean rightHold = false;
     private boolean randomizePosition = false;
@@ -34,12 +36,10 @@ public class NBController {
     private static final int RANDOMIZER_MODIFIER = 4;
 
     private AnimationTimer animationTimer;
-    private BalanceModel balanceModel;
 
 
     @FXML
     private void initialize() {
-        balanceModel = new BalanceModel();
         /*
         startButton.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
             if (event.getCode() == KeyCode.ENTER){
@@ -101,6 +101,10 @@ public class NBController {
                     if (randomizer < 0.5) moveNeedle(posRandom);
                     else moveNeedle(negRandom);
                 }
+                if (isInSafeZone() && randomizePosition){
+                    score += 1;
+                    scoreLabel.setText("Score: " + score);
+                }
             }
         };
 
@@ -121,6 +125,10 @@ public class NBController {
         });
 
          */
+    }
+
+    private boolean isInSafeZone() {
+       return needleX >= (BAR_WIDTH/2) - 40 && needleX <= (BAR_WIDTH/2) + 40;
     }
 
     private void moveNeedle(double amount) {
