@@ -7,8 +7,7 @@
 <?import javafx.geometry.Insets?>
 
 
-
-<AnchorPane fx:id="scene"  xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1"
+<AnchorPane fx:id="scene" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="org.example.needlebalance.NBController">
 
     <!-- Center everything -->
@@ -72,10 +71,15 @@
             <Label text="Press ← and → to stay inside the green zone."
                    style="-fx-font-size: 16px;"/>
             <Label
+
+                    fx:id="scoreLabel"
                     layoutX="150"
                     layoutY="250"
-                    fx:id="scoreLabel"
                     text="Score: 0"/>
+            <ProgressBar
+                    fx:id="scoreProgressBar"
+                    />
+
 
         </VBox>
 
