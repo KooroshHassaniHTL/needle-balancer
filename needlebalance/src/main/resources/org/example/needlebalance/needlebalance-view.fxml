@@ -3,10 +3,12 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.*?>
 
-<AnchorPane fx:id="scene" style="-fx-background-color: linear-gradient(to bottom, #87ceeb, #d7f4ff);" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.needlebalance.NBController">
+<AnchorPane fx:id="scene" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.needlebalance.NBController">
 
     <StackPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 
@@ -14,45 +16,50 @@
             <padding>
                 <Insets bottom="20" left="20" right="20" top="20" />
             </padding>
+            <Label style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: #243447;" text="Balance on the rock" />
 
-            <Label style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: #243447;" text="Rock Balance!" />
-
-            <Label fx:id="statusLabel" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #243447;" text="Press START, then use ← and → to balance." />
+            <Label fx:id="statusLabel" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #243447;" text="Press ENTER, then use ← and → to balance." />
 
             <Label fx:id="rockLabel" style="-fx-font-size: 16px; -fx-text-fill: #243447;" text="Rock: 1" />
 
             <!-- Game stage -->
-            <Pane fx:id="gamePane" maxWidth="620" minWidth="620" prefHeight="310" prefWidth="620" style="-fx-background-color: linear-gradient(to bottom, transparent 0%, transparent 62%, #3f9fd9 63%, #1c6f9c 100%);                          -fx-background-radius: 20;                          -fx-border-color: rgba(255,255,255,0.7);                          -fx-border-radius: 20;                          -fx-border-width: 2;">
+            <Pane fx:id="gamePane" maxWidth="620" minHeight="424.0" minWidth="620" prefHeight="424.0" prefWidth="620" style="-fx-background-radius: 20; -fx-border-color: rgba(0,0,0,1); -fx-border-radius: 10; -fx-border-width: 2;">
 
-                <!-- Water highlights -->
-                <Line endX="170" endY="245" startX="40" startY="245" style="-fx-stroke: rgba(255,255,255,0.45); -fx-stroke-width: 3;" />
-                <Line endX="570" endY="270" startX="420" startY="270" style="-fx-stroke: rgba(255,255,255,0.35); -fx-stroke-width: 3;" />
+                <ImageView fitHeight="449.0" fitWidth="667.0" layoutX="-24.0" layoutY="-9.0" preserveRatio="true">
+                    <image>
+                        <Image url="@images/raging_river.png" />
+                    </image>
+                </ImageView>
 
                 <!-- Rock group: controller rotates this -->
-                <Group fx:id="rockGroup" layoutX="310" layoutY="215">
-                    <Ellipse fx:id="rock" centerX="0" centerY="25" radiusX="92" radiusY="34" style="-fx-fill: #6d6257; -fx-stroke: #3f3933; -fx-stroke-width: 3;" />
-                    <Ellipse centerX="-25" centerY="10" radiusX="38" radiusY="16" style="-fx-fill: rgba(255,255,255,0.12);" />
+                <Group fx:id="rockGroup" layoutX="310" layoutY="300.0">
+                    <ImageView fitHeight="127.0" fitWidth="220.0" layoutX="-110.0" layoutY="-20.0" preserveRatio="true">
+                        <image>
+                            <Image url="@images/rock.png" />
+                        </image>
+                  <effect>
+                     <Lighting bumpInput="$null" diffuseConstant="2.0" specularConstant="0.0" surfaceScale="0.0">
+                        <light>
+                           <Light.Distant />
+                        </light>
+                     </Lighting>
+                  </effect>
+                    </ImageView>
                 </Group>
 
                 <!-- Player group: controller rotates and moves this -->
-                <Group fx:id="playerGroup" layoutX="310" layoutY="185">
-                    <!-- legs -->
-                    <Line endX="-24" endY="36" startX="0" startY="0" style="-fx-stroke: #202020; -fx-stroke-width: 5; -fx-stroke-line-cap: round;" />
-                    <Line endX="24" endY="36" startX="0" startY="0" style="-fx-stroke: #202020; -fx-stroke-width: 5; -fx-stroke-line-cap: round;" />
-
-                    <!-- body -->
-                    <Line endX="0" endY="-55" startX="0" startY="0" style="-fx-stroke: #202020; -fx-stroke-width: 6; -fx-stroke-line-cap: round;" />
-
-                    <!-- arms -->
-                    <Line endX="-38" endY="-15" startX="0" startY="-35" style="-fx-stroke: #202020; -fx-stroke-width: 5; -fx-stroke-line-cap: round;" />
-                    <Line endX="38" endY="-15" startX="0" startY="-35" style="-fx-stroke: #202020; -fx-stroke-width: 5; -fx-stroke-line-cap: round;" />
-
-                    <!-- head -->
-                    <Circle centerX="0" centerY="-75" radius="16" style="-fx-fill: #ffd19c; -fx-stroke: #202020; -fx-stroke-width: 3;" />
+                <Group fx:id="playerGroup" layoutX="310" layoutY="300.0">
+                    <ImageView fitHeight="257.0" fitWidth="400.0" layoutX="-200.0" layoutY="-200.0" preserveRatio="true">
+                        <image>
+                            <Image url="@images/major_front_transparent.png" />
+                        </image>
+                    </ImageView>
                 </Group>
 
+
                 <!-- Danger indicators -->
-                <Label fx:id="fallWarningLabel" layoutX="190" layoutY="25" style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #b00020;" text="" />
+                <Label fx:id="fallWarningLabel" layoutX="190" layoutY="25" prefWidth="5.0" style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #b00020;" text="" />
+
             </Pane>
 
             <!-- Balance Bar -->
@@ -66,7 +73,7 @@
 
                 <Rectangle fx:id="safeZone" arcHeight="12" arcWidth="12" height="22" style="-fx-fill: limegreen;" width="80" x="210" y="18" />
 
-                <Line fx:id="balanceMarker" endX="250" endY="55" startX="250" startY="3" style="-fx-stroke: white; -fx-stroke-width: 5;" />
+                <Line fx:id="balanceMarker" endX="250" endY="55" startX="250" startY="3" stroke="#0026ff" style="-fx-stroke: #800202; -fx-stroke-width: 5;" />
 
             </Pane>
 
@@ -76,8 +83,8 @@
 
             <Button fx:id="startButton" style="-fx-font-size: 15px; -fx-font-weight: bold; -fx-padding: 8 20 8 20;" text="START" />
 
+
         </VBox>
 
     </StackPane>
-
 </AnchorPane>

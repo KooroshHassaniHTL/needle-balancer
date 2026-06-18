@@ -346,7 +346,7 @@ public class NBController {
         fallen = true;
         running = false;
 
-        statusLabel.setText("You fell! Press START to try again.");
+        statusLabel.setText("You fell! Press ENTER to try again.");
         fallWarningLabel.setText("SPLASH!");
 
         double direction = needleX < CENTER_X ? -1 : 1;
