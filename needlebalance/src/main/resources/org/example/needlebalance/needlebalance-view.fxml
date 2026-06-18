@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.*?>
 
-<AnchorPane fx:id="scene" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.needlebalance.NBController">
+<AnchorPane fx:id="scene" style="-fx-background-color: #0f1117;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.needlebalance.NBController">
 
     <StackPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 
@@ -16,14 +16,14 @@
             <padding>
                 <Insets bottom="20" left="20" right="20" top="20" />
             </padding>
-            <Label style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: #243447;" text="Balance on the rock" />
+            <Label style="-fx-font-size: 34px; -fx-font-weight: bold; -fx-text-fill: #f5f7fa;" text="Balance on the Rock" />
 
-            <Label fx:id="statusLabel" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #243447;" text="Press ENTER, then use ← and → to balance." />
+            <Label fx:id="statusLabel" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #d7dde8;" text="Press ENTER, then use ← and → to balance." />
 
-            <Label fx:id="rockLabel" style="-fx-font-size: 16px; -fx-text-fill: #243447;" text="Rock: 1" />
+            <Label fx:id="rockLabel" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #d7dde8;" text="Rock: 1" />
 
             <!-- Game stage -->
-            <Pane fx:id="gamePane" maxWidth="620" minHeight="424.0" minWidth="620" prefHeight="424.0" prefWidth="620" style="-fx-background-radius: 20; -fx-border-color: rgba(0,0,0,1); -fx-border-radius: 10; -fx-border-width: 2;">
+            <Pane fx:id="gamePane" maxWidth="620" minWidth="620" prefHeight="310" prefWidth="620" style="-fx-background-color: #111827; -fx-background-radius: 20; -fx-border-color: #e5e7eb; -fx-border-radius: 10; -fx-border-width: 2;">
 
                 <ImageView fitHeight="449.0" fitWidth="667.0" layoutX="-24.0" layoutY="-9.0" preserveRatio="true">
                     <image>
@@ -79,10 +79,9 @@
 
             <ProgressBar fx:id="scoreProgressBar" prefWidth="500" progress="0" />
 
-            <Label fx:id="scoreLabel" style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Stability: 0%" />
+            <Label fx:id="scoreLabel" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #d7dde8;" text="Stability: 0%" />
 
-            <Button fx:id="startButton" style="-fx-font-size: 15px; -fx-font-weight: bold; -fx-padding: 8 20 8 20;" text="START" />
-
+            <Button fx:id="startButton" style="-fx-background-color: #2563eb; -fx-background-radius: 10; -fx-text-fill: white; -fx-font-size: 15px; -fx-font-weight: bold; -fx-padding: 8 22 8 22; -fx-cursor: hand;" text="START" />
 
         </VBox>
 
