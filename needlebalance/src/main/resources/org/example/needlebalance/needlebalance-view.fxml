@@ -1,85 +1,80 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.*?>
 
-<?import javafx.geometry.Insets?>
+<AnchorPane fx:id="scene" style="-fx-background-color: linear-gradient(to bottom, #87ceeb, #d7f4ff);" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.needlebalance.NBController">
 
+    <StackPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 
-<AnchorPane fx:id="scene" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="org.example.needlebalance.NBController">
+        <VBox alignment="CENTER" spacing="18">
+            <padding>
+                <Insets bottom="20" left="20" right="20" top="20" />
+            </padding>
 
-    <!-- Center everything -->
-    <StackPane AnchorPane.topAnchor="0.0"
-               AnchorPane.bottomAnchor="0.0"
-               AnchorPane.leftAnchor="0.0"
-               AnchorPane.rightAnchor="0.0">
+            <Label style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: #243447;" text="Rock Balance!" />
 
-        <VBox alignment="CENTER" spacing="20">
+            <Label fx:id="statusLabel" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #243447;" text="Press START, then use ← and → to balance." />
 
-            <Label text="Balance!"
-                   style="-fx-font-size: 28px; -fx-font-weight: bold;"/>
+            <Label fx:id="rockLabel" style="-fx-font-size: 16px; -fx-text-fill: #243447;" text="Rock: 1" />
+
+            <!-- Game stage -->
+            <Pane fx:id="gamePane" maxWidth="620" minWidth="620" prefHeight="310" prefWidth="620" style="-fx-background-color: linear-gradient(to bottom, transparent 0%, transparent 62%, #3f9fd9 63%, #1c6f9c 100%);                          -fx-background-radius: 20;                          -fx-border-color: rgba(255,255,255,0.7);                          -fx-border-radius: 20;                          -fx-border-width: 2;">
+
+                <!-- Water highlights -->
+                <Line endX="170" endY="245" startX="40" startY="245" style="-fx-stroke: rgba(255,255,255,0.45); -fx-stroke-width: 3;" />
+                <Line endX="570" endY="270" startX="420" startY="270" style="-fx-stroke: rgba(255,255,255,0.35); -fx-stroke-width: 3;" />
+
+                <!-- Rock group: controller rotates this -->
+                <Group fx:id="rockGroup" layoutX="310" layoutY="215">
+                    <Ellipse fx:id="rock" centerX="0" centerY="25" radiusX="92" radiusY="34" style="-fx-fill: #6d6257; -fx-stroke: #3f3933; -fx-stroke-width: 3;" />
+                    <Ellipse centerX="-25" centerY="10" radiusX="38" radiusY="16" style="-fx-fill: rgba(255,255,255,0.12);" />
+                </Group>
+
+                <!-- Player group: controller rotates and moves this -->
+                <Group fx:id="playerGroup" layoutX="310" layoutY="185">
+                    <!-- legs -->
+                    <Line endX="-24" endY="36" startX="0" startY="0" style="-fx-stroke: #202020; -fx-stroke-width: 5; -fx-stroke-line-cap: round;" />
+                    <Line endX="24" endY="36" startX="0" startY="0" style="-fx-stroke: #202020; -fx-stroke-width: 5; -fx-stroke-line-cap: round;" />
+
+                    <!-- body -->
+                    <Line endX="0" endY="-55" startX="0" startY="0" style="-fx-stroke: #202020; -fx-stroke-width: 6; -fx-stroke-line-cap: round;" />
+
+                    <!-- arms -->
+                    <Line endX="-38" endY="-15" startX="0" startY="-35" style="-fx-stroke: #202020; -fx-stroke-width: 5; -fx-stroke-line-cap: round;" />
+                    <Line endX="38" endY="-15" startX="0" startY="-35" style="-fx-stroke: #202020; -fx-stroke-width: 5; -fx-stroke-line-cap: round;" />
+
+                    <!-- head -->
+                    <Circle centerX="0" centerY="-75" radius="16" style="-fx-fill: #ffd19c; -fx-stroke: #202020; -fx-stroke-width: 3;" />
+                </Group>
+
+                <!-- Danger indicators -->
+                <Label fx:id="fallWarningLabel" layoutX="190" layoutY="25" style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #b00020;" text="" />
+            </Pane>
 
             <!-- Balance Bar -->
-            <Pane fx:id="balancePane"
-                  prefWidth="500"
-                  prefHeight="50"
-                  maxWidth="500"
-                  minWidth="500">
+            <Pane fx:id="balancePane" maxWidth="500" minWidth="500" prefHeight="58" prefWidth="500">
 
-                <!-- Background -->
-                <Rectangle fx:id="backgroundBar"
-                           x="0"
-                           y="15"
-                           width="500"
-                           height="20"
-                           arcWidth="10"
-                           arcHeight="10"
-                           style="-fx-fill: lightgray;"/>
+                <Rectangle fx:id="backgroundBar" arcHeight="12" arcWidth="12" height="22" style="-fx-fill: #3a3a3a;" width="500" x="0" y="18" />
 
-                <!-- Safe zone -->
-                <Rectangle fx:id="safeZone"
-                           x="210"
-                           y="15"
-                           width="80"
-                           height="20"
-                           arcWidth="10"
-                           arcHeight="10"
-                           style="-fx-fill: limegreen;"/>
+                <Rectangle fx:id="dangerLeft" arcHeight="12" arcWidth="12" height="22" style="-fx-fill: #c62828;" width="90" x="0" y="18" />
 
-                <!-- Balance marker -->
-                <Line fx:id="balanceMarker"
-                      startX="250"
-                      startY="0"
-                      endX="250"
-                      endY="50"
-                      style="-fx-stroke: red; -fx-stroke-width: 4;"/>
+                <Rectangle fx:id="dangerRight" arcHeight="12" arcWidth="12" height="22" style="-fx-fill: #c62828;" width="90" x="410" y="18" />
+
+                <Rectangle fx:id="safeZone" arcHeight="12" arcWidth="12" height="22" style="-fx-fill: limegreen;" width="80" x="210" y="18" />
+
+                <Line fx:id="balanceMarker" endX="250" endY="55" startX="250" startY="3" style="-fx-stroke: white; -fx-stroke-width: 5;" />
 
             </Pane>
 
-            <!--
-            <HBox alignment="CENTER" spacing="25" prefWidth="500">
-                <Button fx:id="leftButton" text="←"
-                        style="-fx-pref-width: 50; -fx-pref-height: 25"/>
-                <Button fx:id="rightButton" text="→"
-                        style="-fx-pref-width: 50; -fx-pref-height: 25"/>
-            </HBox>
-            -->
-            <Button fx:id="startButton" text="START" style="-fx-font-weight: bold;"/>
+            <ProgressBar fx:id="scoreProgressBar" prefWidth="500" progress="0" />
 
-            <Label text="Press ← and → to stay inside the green zone."
-                   style="-fx-font-size: 16px;"/>
-            <Label
+            <Label fx:id="scoreLabel" style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Stability: 0%" />
 
-                    fx:id="scoreLabel"
-                    layoutX="150"
-                    layoutY="250"
-                    text="Score: 0"/>
-            <ProgressBar
-                    fx:id="scoreProgressBar"
-                    />
-
+            <Button fx:id="startButton" style="-fx-font-size: 15px; -fx-font-weight: bold; -fx-padding: 8 20 8 20;" text="START" />
 
         </VBox>
 
