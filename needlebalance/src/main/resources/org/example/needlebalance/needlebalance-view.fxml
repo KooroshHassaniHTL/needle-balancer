@@ -8,82 +8,81 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.*?>
 
-<AnchorPane fx:id="scene" style="-fx-background-color: #0f1117;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.needlebalance.NBController">
+<AnchorPane fx:id="scene" style="-fx-background-color: #0b0f19;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.needlebalance.NBController">
 
     <StackPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-
-        <VBox alignment="CENTER" spacing="18">
+        <VBox alignment="CENTER" prefHeight="967.0" prefWidth="1052.0" spacing="24">
             <padding>
-                <Insets bottom="20" left="20" right="20" top="20" />
+                <Insets bottom="30" left="30" right="30" top="30" />
             </padding>
-            <Label style="-fx-font-size: 34px; -fx-font-weight: bold; -fx-text-fill: #f5f7fa;" text="Balance on the Rock" />
 
-            <Label fx:id="statusLabel" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #d7dde8;" text="Press ENTER, then use ← and → to balance." />
+            <VBox alignment="CENTER" spacing="6">
+                <Label style="-fx-font-size: 38px; -fx-font-weight: 900; -fx-text-fill: #f8fafc; -fx-font-family: 'Segoe UI', Helvetica, Arial, sans-serif;" text="Balance on the Rock" />
+                <Label fx:id="statusLabel" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #94a3b8;" text="Press ENTER, then use ← and → to balance." />
+            </VBox>
 
-            <Label fx:id="rockLabel" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #d7dde8;" text="Rock: 1" />
+            <HBox alignment="CENTER" spacing="40">
+                <Label fx:id="rockLabel" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #38bdf8; -fx-background-color: #1e293b; -fx-padding: 6 16 6 16; -fx-background-radius: 20;" text="Rock: 1" />
+                <Label fx:id="scoreLabel" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #10b981; -fx-background-color: #1e293b; -fx-padding: 6 16 6 16; -fx-background-radius: 20;" text="Stability: 0%" />
+            </HBox>
 
-            <!-- Game stage -->
-            <Pane fx:id="gamePane" maxWidth="620" minWidth="620" prefHeight="310" prefWidth="620" style="-fx-background-color: #111827; -fx-background-radius: 20; -fx-border-color: #e5e7eb; -fx-border-radius: 10; -fx-border-width: 2;">
+            <Pane fx:id="gamePane" maxWidth="620" minWidth="620" prefHeight="660" prefWidth="620" style="-fx-background-color: #0f172a; -fx-background-radius: 24; -fx-border-color: #334155; -fx-border-radius: 24; -fx-border-width: 2;">
+                <effect>
+                    <DropShadow blurType="GAUSSIAN" color="#000000aa" height="30.0" radius="14.5" width="30.0" />
+                </effect>
 
-                <ImageView fitHeight="449.0" fitWidth="667.0" layoutX="-24.0" layoutY="-9.0" preserveRatio="true">
+                <ImageView fitHeight="692.0" fitWidth="1000.0" layoutX="-190.0" opacity="0.85" preserveRatio="true">
                     <image>
                         <Image url="@images/raging_river.png" />
                     </image>
                 </ImageView>
 
-                <!-- Rock group: controller rotates this -->
                 <Group fx:id="rockGroup" layoutX="310" layoutY="300.0">
-                    <ImageView fitHeight="127.0" fitWidth="220.0" layoutX="-110.0" layoutY="-20.0" preserveRatio="true">
+                    <ImageView fitHeight="127.0" fitWidth="220.0" layoutX="-110.0" layoutY="110.0" preserveRatio="true">
                         <image>
                             <Image url="@images/rock.png" />
                         </image>
-                  <effect>
-                     <Lighting bumpInput="$null" diffuseConstant="2.0" specularConstant="0.0" surfaceScale="0.0">
-                        <light>
-                           <Light.Distant />
-                        </light>
-                     </Lighting>
-                  </effect>
+                        <effect>
+                            <Lighting bumpInput="$null" diffuseConstant="1.6" specularConstant="0.2" surfaceScale="1.0">
+                                <light>
+                                    <Light.Distant azimuth="225.0" elevation="45.0" />
+                                </light>
+                            </Lighting>
+                        </effect>
                     </ImageView>
                 </Group>
 
-                <!-- Player group: controller rotates and moves this -->
                 <Group fx:id="playerGroup" layoutX="310" layoutY="300.0">
-                    <ImageView fitHeight="257.0" fitWidth="400.0" layoutX="-200.0" layoutY="-200.0" preserveRatio="true">
+                    <ImageView fitHeight="257.0" fitWidth="400.0" layoutX="-200.0" layoutY="-80.0" preserveRatio="true">
                         <image>
                             <Image url="@images/major_front_transparent.png" />
                         </image>
                     </ImageView>
                 </Group>
 
+                <Label fx:id="fallWarningLabel" alignment="CENTER" layoutX="110.0" layoutY="35.0" prefWidth="400.0" style="-fx-font-size: 24px; -fx-font-weight: 800; -fx-text-fill: #f43f5e; -fx-alignment: center;" text="" />
 
-                <!-- Danger indicators -->
-                <Label fx:id="fallWarningLabel" layoutX="190" layoutY="25" prefWidth="5.0" style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #b00020;" text="" />
+                <ProgressBar fx:id="scoreProgressBar" layoutX="60.0" layoutY="550.0" prefWidth="500.0" progress="0.0" style="-fx-accent: #38bdf8; -fx-control-inner-background: #1e293b; -fx-text-box-border: transparent; -fx-background-radius: 10; -fx-padding: 2;" />
 
+                <Button fx:id="startButton" layoutX="245.0" layoutY="690.0" prefWidth="130.0" style="-fx-background-color: linear-gradient(to bottom, #3b82f6, #1d4ed8); -fx-background-radius: 12; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold; -fx-padding: 10 24 10 24; -fx-cursor: hand;" text="START">
+                    <effect>
+                        <DropShadow color="#2563eb66" radius="10" />
+                    </effect>
+                </Button>
             </Pane>
 
-            <!-- Balance Bar -->
-            <Pane fx:id="balancePane" maxWidth="500" minWidth="500" prefHeight="58" prefWidth="500">
+            <Pane fx:id="balancePane" maxWidth="500" minWidth="500" prefHeight="60" prefWidth="500">
+                <Rectangle fx:id="backgroundBar" arcHeight="16" arcWidth="16" height="26" layoutY="-100.0" style="-fx-fill: #1e293b;" width="500" x="0" y="17" />
 
-                <Rectangle fx:id="backgroundBar" arcHeight="12" arcWidth="12" height="22" style="-fx-fill: #3a3a3a;" width="500" x="0" y="18" />
+                <Rectangle fx:id="dangerLeft" arcHeight="16" arcWidth="16" height="26" layoutY="-100.0" style="-fx-fill: #f43f5e;" width="90" x="0" y="17" />
 
-                <Rectangle fx:id="dangerLeft" arcHeight="12" arcWidth="12" height="22" style="-fx-fill: #c62828;" width="90" x="0" y="18" />
+                <Rectangle fx:id="dangerRight" arcHeight="16" arcWidth="16" height="26" layoutY="-100.0" style="-fx-fill: #f43f5e;" width="90" x="410" y="17" />
 
-                <Rectangle fx:id="dangerRight" arcHeight="12" arcWidth="12" height="22" style="-fx-fill: #c62828;" width="90" x="410" y="18" />
+                <Rectangle fx:id="safeZone" arcHeight="8" arcWidth="8" height="26" layoutY="-100.0" style="-fx-fill: #10b981;" width="80" x="210" y="17" />
 
-                <Rectangle fx:id="safeZone" arcHeight="12" arcWidth="12" height="22" style="-fx-fill: limegreen;" width="80" x="210" y="18" />
-
-                <Line fx:id="balanceMarker" endX="250" endY="55" startX="250" startY="3" stroke="#0026ff" style="-fx-stroke: #800202; -fx-stroke-width: 5;" />
-
+                <Line fx:id="balanceMarker" endX="250" endY="54" layoutY="-100.0" startX="250" startY="6" style="-fx-stroke: #f59e0b; -fx-stroke-width: 4; -fx-stroke-line-cap: round;" />
             </Pane>
-
-            <ProgressBar fx:id="scoreProgressBar" prefWidth="500" progress="0" />
-
-            <Label fx:id="scoreLabel" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #d7dde8;" text="Stability: 0%" />
-
-            <Button fx:id="startButton" style="-fx-background-color: #2563eb; -fx-background-radius: 10; -fx-text-fill: white; -fx-font-size: 15px; -fx-font-weight: bold; -fx-padding: 8 22 8 22; -fx-cursor: hand;" text="START" />
 
         </VBox>
-
     </StackPane>
 </AnchorPane>

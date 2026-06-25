@@ -14,6 +14,7 @@ public class NBApplication extends Application {
         Scene scene = new Scene(fxmlLoader.load(), 900, 700);
         stage.setTitle("Raging River!");
         stage.setScene(scene);
+        stage.setFullScreen(true);
         stage.show();
     }
 }

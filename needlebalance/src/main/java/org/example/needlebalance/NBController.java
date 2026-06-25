@@ -85,6 +85,7 @@ public class NBController {
             }
         });
 
+
         scene.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.LEFT){
                 leftHold = true;
@@ -93,7 +94,7 @@ public class NBController {
                 rightHold = true;
             }
 
-            if (event.getCode() == KeyCode.ENTER) {
+            if (event.getCode() == KeyCode.ENTER && !running) {
                 startButton.fire();
             }
         });
@@ -107,7 +108,7 @@ public class NBController {
            }
         });
 
-        startButton.addEventHandler(ActionEvent.ACTION, event -> restartGame());
+        startButton.addEventHandler(ActionEvent.ACTION, event -> startGame());
 
         scoreProgressBar.progressProperty().bind(stabilityProperty);
 
@@ -279,7 +280,7 @@ public class NBController {
         }
     }
 
-    private void restartGame() {
+    private void startGame() {
         rockNumber = 1;
         running = true;
         jumping = false;
@@ -293,8 +294,7 @@ public class NBController {
 
         stabilityProperty.set(0);
 
-        startButton.setText("RESTART");
-        statusLabel.setText("Balance on the rock!");
+        startButton.setVisible(false);
         rockLabel.setText("Rock: " + rockNumber);
         fallWarningLabel.setText("");
 
